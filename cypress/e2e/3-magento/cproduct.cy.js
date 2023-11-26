@@ -20,7 +20,7 @@ describe('Verify Choose Product Functionality', () => {
         cy.get('#qty').type('5')
         cy.get('#product-addtocart-button').click()
       })
-      it('Success/Failed Add Wishlist Item', () => {
+      it('Failed Add Wishlist Item', () => {
         cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
         cy.get('.panel > .header > .authorization-link').click()
         cy.get('#email').type(data.validData.validUser)
@@ -28,13 +28,14 @@ describe('Verify Choose Product Functionality', () => {
         cy.get('.action.login.primary').click()
         cy.get(':nth-child(5) > .product-item-info > .product-item-photo > .product-image-container > .product-image-wrapper > .product-image-photo').click()
         cy.get('.action.towishlist').click()
-        if ('.page.message.message-error') {
-            cy.get('.message-error > div').should('contain', 'Invalid Form Key')
-        } else {
-            cy.get('.message-success > div').should('contain', 'You added')
-        }
+        cy.get('.message-error > div').should('contain', 'Invalid Form Key')
+        // if ('.page.message.message-error') {
+        //     cy.get('.message-error > div').should('contain', 'Invalid Form Key')
+        // } else {
+        //     cy.get('.message-success > div').should('contain', 'You added')
+        // }
       }) 
-      it('Failed/Success Add to Comparing Item - Invalid Form Key', () => {
+      it('Failed Add to Comparing Item - Invalid Form Key', () => {
         cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
         cy.get('.panel > .header > .authorization-link').click()
         cy.get('#email').type(data.validData.validUser)
@@ -42,11 +43,7 @@ describe('Verify Choose Product Functionality', () => {
         cy.get('.action.login.primary').click()
         cy.get(':nth-child(5) > .product-item-info > .product-item-photo > .product-image-container > .product-image-wrapper > .product-image-photo').click()
         cy.get('.action.tocompare').click()
-        if ('.page.message.message-error') {
-            cy.get('.message-error > div').should('contain', 'Invalid Form Key')
-        } else {
-            cy.get('.message-success > div').should('contain', 'You added')
-        }
+        cy.get('.message-error > div').should('contain', 'Invalid Form Key')
       })
       it('Success Choose Other Product in Detail Product Page', () => {
         cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
