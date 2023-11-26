@@ -1,6 +1,6 @@
 # Sanber51-Kel14
-1. Lisallah
-2. Fadliana Raekania
-3. Alvi Durunnafis
-4. Yazid Rizki Eka Darmawan
-5. Rafi Kyr
+
+1. Lisallah (Login & Choose Products)
+2. Alvi Durunnafis (Procesed to Checkout)
+3. Yazid Rizki Eka Darmawan (View and Update Shopping Cart)
+4. Rafi Kyr (Create and Account)
