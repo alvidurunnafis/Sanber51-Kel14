@@ -2,7 +2,7 @@ let data = require('../../fixtures/userData.json')
 
 describe('Verify Magento Login Functionality', () => {
   it('Success Login', () => {
-    cy.visit('https://magento.softwaretestingboard.com/')
+    cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
     cy.get('.panel > .header > .authorization-link').click()
     cy.get('#email').type(data.validData.validUser)
     cy.get('.login-container > .block-customer-login > .block-content > #login-form > .fieldset > .password > .control > #pass').type(data.validData.validPass)
@@ -10,7 +10,7 @@ describe('Verify Magento Login Functionality', () => {
     cy.get(':nth-child(2) > .greet > .logged-in').should('contain', 'Welcome')
   })
   it('Failed Login - Password Incorrect', () => {
-    cy.visit('https://magento.softwaretestingboard.com/')
+    cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
     cy.get('.panel > .header > .authorization-link').click()
     cy.get('#email').type(data.validData.validUser)
     cy.get('.login-container > .block-customer-login > .block-content > #login-form > .fieldset > .password > .control > #pass').type(data.invalidData.invalidPass)
@@ -18,7 +18,7 @@ describe('Verify Magento Login Functionality', () => {
     cy.get('.message-error > div').should('contain', 'sign-in was incorrect')
   })
   it('Failed Login - Email Incorrect', () => {
-    cy.visit('https://magento.softwaretestingboard.com/')
+    cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
     cy.get('.panel > .header > .authorization-link').click()
     cy.get('#email').type(data.invalidData.invalidUser)
     cy.get('.login-container > .block-customer-login > .block-content > #login-form > .fieldset > .password > .control > #pass').type(data.validData.validPass)
@@ -26,7 +26,7 @@ describe('Verify Magento Login Functionality', () => {
     cy.get('.message-error > div').should('contain', 'sign-in was incorrect')
   })
   it('Forget Password', () => {
-    cy.visit('https://magento.softwaretestingboard.com/')
+    cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
     cy.get('.panel > .header > .authorization-link').click()
     cy.get('#email').type(data.validData.validUser)
     cy.get('.login-container > .block-customer-login > .block-content > #login-form > .fieldset > .actions-toolbar > .secondary > .action > span').click()
