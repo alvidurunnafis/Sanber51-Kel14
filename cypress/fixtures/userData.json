@@ -1,0 +1,10 @@
+{
+    "validData": {
+        "validUser": "filelisa02@gmail.com",
+        "validPass": "S3cr3tPass"
+    },
+    "invalidData": {
+        "invalidUser": "lisa02@gmail.com",
+        "invalidPass": "12345678"
+    }
+}
