@@ -48,7 +48,7 @@ describe('Verify Choose Product Functionality', () => {
             cy.get('.message-success > div').should('contain', 'You added')
         }
       })
-      it.only('Success Choose Other Product in Detail Product Page', () => {
+      it('Success Choose Other Product in Detail Product Page', () => {
         cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
         cy.get('.panel > .header > .authorization-link').click()
         cy.get('#email').type(data.validData.validUser)
