@@ -24,12 +24,12 @@ describe('Verify Magento Login Functionality', () => {
     button.clickLogin()
     cy.get('.message-error > div').should('contain', 'sign-in was incorrect')
   })
-  it('Forget Password', () => {
+  it.only('Forget Password', () => {
     cy.goTo('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
     button.clickSignIn()
-    toLogin.inputUsername(data.validData.validUser)
+    cy.get(toLogin.uname).type(data.validData.validUser)
     cy.get('.login-container > .block-customer-login > .block-content > #login-form > .fieldset > .actions-toolbar > .secondary > .action > span').click()
-    toLogin.inputUsername(data.validData.validUser)
+    cy.get(toLogin.email).type(data.validData.validUser)
     button.clickConfirm()
     cy.get('.message-success > div').should('contain', 'will receive an email with a link to reset your password')
   })
