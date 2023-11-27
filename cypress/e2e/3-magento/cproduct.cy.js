@@ -1,60 +1,52 @@
+import button from '../../support/pageObject/button'
+import toLogin from '../../support/pageObject/toLogin'
 let data = require('../../fixtures/userData.json')
 
 describe('Verify Choose Product Functionality', () => {
     it('Success Add One Item', () => {
-      cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
-      cy.get('.panel > .header > .authorization-link').click()
-      cy.get('#email').type(data.validData.validUser)
-      cy.get('.login-container > .block-customer-login > .block-content > #login-form > .fieldset > .password > .control > #pass').type(data.validData.validPass)
-      cy.get('.action.login.primary').click()
-      cy.get(':nth-child(5) > .product-item-info > .product-item-photo > .product-image-container > .product-image-wrapper > .product-image-photo').click()
-      cy.get('#product-addtocart-button').click()
+      cy.goTo('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
+      button.clickSignIn()
+      toLogin.login(data.validData.validUser, data.validData.validPass)
+      button.clickLogin()
+      button.clickProduct()
+      button.clickAdd()
     })
     it('Success Add 15 Same Item', () => {
-        cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
-        cy.get('.panel > .header > .authorization-link').click()
-        cy.get('#email').type(data.validData.validUser)
-        cy.get('.login-container > .block-customer-login > .block-content > #login-form > .fieldset > .password > .control > #pass').type(data.validData.validPass)
-        cy.get('.action.login.primary').click()
-        cy.get(':nth-child(5) > .product-item-info > .product-item-photo > .product-image-container > .product-image-wrapper > .product-image-photo').click()
-        cy.get('#qty').type('5')
-        cy.get('#product-addtocart-button').click()
-      })
-      it('Failed Add Wishlist Item', () => {
-        cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
-        cy.get('.panel > .header > .authorization-link').click()
-        cy.get('#email').type(data.validData.validUser)
-        cy.get('.login-container > .block-customer-login > .block-content > #login-form > .fieldset > .password > .control > #pass').type(data.validData.validPass)
-        cy.get('.action.login.primary').click()
-        cy.get(':nth-child(5) > .product-item-info > .product-item-photo > .product-image-container > .product-image-wrapper > .product-image-photo').click()
-        cy.get('.action.towishlist').click()
-        cy.get('.message-error > div').should('contain', 'Invalid Form Key')
-        // if ('.page.message.message-error') {
-        //     cy.get('.message-error > div').should('contain', 'Invalid Form Key')
-        // } else {
-        //     cy.get('.message-success > div').should('contain', 'You added')
-        // }
-      }) 
-      it('Failed Add to Comparing Item - Invalid Form Key', () => {
-        cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
-        cy.get('.panel > .header > .authorization-link').click()
-        cy.get('#email').type(data.validData.validUser)
-        cy.get('.login-container > .block-customer-login > .block-content > #login-form > .fieldset > .password > .control > #pass').type(data.validData.validPass)
-        cy.get('.action.login.primary').click()
-        cy.get(':nth-child(5) > .product-item-info > .product-item-photo > .product-image-container > .product-image-wrapper > .product-image-photo').click()
-        cy.get('.action.tocompare').click()
-        cy.get('.message-error > div').should('contain', 'Invalid Form Key')
-      })
-      it('Success Choose Other Product in Detail Product Page', () => {
-        cy.goto('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
-        cy.get('.panel > .header > .authorization-link').click()
-        cy.get('#email').type(data.validData.validUser)
-        cy.get('.login-container > .block-customer-login > .block-content > #login-form > .fieldset > .password > .control > #pass').type(data.validData.validPass)
-        cy.get('.action.login.primary').click()
-        cy.get(':nth-child(5) > .product-item-info > .product-item-photo > .product-image-container > .product-image-wrapper > .product-image-photo').click()
-        cy.get('.product-item-link').click()
-        cy.get('#product-addtocart-button').click()
-      })
+      cy.goTo('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
+      button.clickSignIn()
+      toLogin.login(data.validData.validUser, data.validData.validPass)
+      button.clickLogin()
+      button.clickProduct()
+      cy.get('#qty').type('5')
+      button.clickAdd()
+    })
+    it('Failed Add Wishlist Item', () => {
+      cy.goTo('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
+      button.clickSignIn()
+      toLogin.login(data.validData.validUser, data.validData.validPass)
+      button.clickLogin()
+      button.clickProduct()
+      cy.get('.action.towishlist').click()
+      cy.get('.message-error > div').should('contain', 'Invalid Form Key')
+    }) 
+    it('Failed Add to Comparing Item', () => {
+      cy.goTo('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
+      button.clickSignIn()
+      toLogin.login(data.validData.validUser, data.validData.validPass)
+      button.clickLogin()
+      button.clickProduct()
+      cy.get('.action.tocompare').click()
+      cy.get('.message-error > div').should('contain', 'Invalid Form Key')
+    })
+    it('Success Choose Other Product in Detail Product Page', () => {
+      cy.goTo('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
+      button.clickSignIn()
+      toLogin.login(data.validData.validUser, data.validData.validPass)
+      button.clickLogin()
+      button.clickProduct()
+      cy.get('.product-item-link').click()
+      button.clickAdd()
+    })
 })
 Cypress.on('uncaught:exception', (err, runnable) => {
     return false

@@ -11,7 +11,7 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
-Cypress.Commands.add('goto', (laman) => {
+Cypress.Commands.add('goTo', (laman) => {
     cy.visit(laman)
 })
 //
