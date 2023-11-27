@@ -24,7 +24,7 @@ describe('Verify Magento Login Functionality', () => {
     button.clickLogin()
     cy.get('.message-error > div').should('contain', 'sign-in was incorrect')
   })
-  it.only('Forget Password', () => {
+  it('Forget Password', () => {
     cy.goTo('https://magento.softwaretestingboard.com/') // CUSTOM COMMAND
     button.clickSignIn()
     cy.get(toLogin.uname).type(data.validData.validUser)
