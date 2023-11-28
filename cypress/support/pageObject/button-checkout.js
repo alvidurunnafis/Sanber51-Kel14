@@ -10,6 +10,7 @@ class Button{
     viewAndEditCart = ':nth-child(7) > .secondary > .action > span'
     checkout = '.checkout-methods-items > :nth-child(1) > .action'
     newAddress = '.new-address-popup > .action'
+    moveToWishlist = ':nth-child(3) > .item-actions > td > .actions-toolbar > .use-ajax > span'
 
     clickConfirm(){
         cy.get(this.btnForgetPass).click()
@@ -60,6 +61,10 @@ class Button{
         cy.visit('https://magento.softwaretestingboard.com/checkout/#shipping')
         cy.url().should('include', 'https://magento.softwaretestingboard.com/checkout/#shipping')
         cy.wait(5000)
+    }
+    clickMoveToWishlist(){
+        cy.get(this.moveToWishlist).click({force: true})
+        cy.get('.message-success > div').should('contain', 'has been moved to your wish list.')
     }
     
 }
