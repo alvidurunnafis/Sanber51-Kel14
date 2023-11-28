@@ -1,10 +1,16 @@
 {
     "validData": {
         "validUser": "filelisa02@gmail.com",
-        "validPass": "S3cr3tPass"
+        "validPass": "S3cr3tPass",
+
+        "validUser2": "alvi.kpj23@gmail.com",
+        "validPass2": "alvi123#"
     },
     "invalidData": {
         "invalidUser": "lisa02@gmail.com",
-        "invalidPass": "12345678"
+        "invalidPass": "12345678",
+
+        "invalidUser2": "alvi@gmail.com",
+        "invalidPass2": "alvi"
     }
 }
