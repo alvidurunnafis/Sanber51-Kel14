@@ -2,56 +2,54 @@ import data from '../../../fixtures/UserData.json'
 import button from '../../../support/pageObject/button-checkout'
 import toLogin from '../../../support/pageObject/toLogin'
 
-describe('Verify Magento Checkout Product', () => {
-  
-  it('Proceed Checkout When Click Button "Proceed to Checkout" - Successful', () => {
+describe('Verify Magento Checkout Product - Successful', () => {
+    it('Proceed Checkout When Click Button "Proceed to Checkout" and Use The Shipping Address Provided - Successful', () => {
     cy.goTo('')
     button.clickSignIn()
-    toLogin.login(data.validData.validUser, data.validData.validPass)
+    toLogin.login(data.validData.validUser2, data.validData.validPass2)
     button.clickLogin()
     button.clickShowcart()
     button.clickProceedtoCheckout()
-    cy.ShippingAddress('Home', 'Jl. Merdeka', 'Malang', 'Alaska', '123456', 'Indonesia', '086543456765')
-    
+    button.clickNext()
+    button.clickPlaceOrder()
+    button.clickContinueShopping()
   })
-
-  it.only('Verify Shopping Address Is Empty - Failed', () => {
+  it('Proceed Checkout When Click Button "Proceed to Checkout" and New Shipping Address - Successful', () => {
     cy.goTo('')
     button.clickSignIn()
-    toLogin.login(data.validData.validUser, data.validData.validPass)
+    toLogin.login(data.validData.validUser2, data.validData.validPass2)
     button.clickLogin()
     button.clickShowcart()
     button.clickProceedtoCheckout()
-    cy.ShippingAddress('', '', '', 'Alaska', '', 'Indonesia', '')
-    cy.VerifyShippingMethods('.message > span', 'The shipping method is missing.')
+    button.clickNewAddress()
+    cy.NewShippingAddress('Home', 'Jl. Hts', 'Malang', 'Florida', '135798', 'Indonesia', '085678234567')
   })
-
-  it('Verify Shopping Methods Is Empty - Failed', () => {
+  it.only('Proceed Checkout When Click "View and Edit Cart" - Successful', () => {
     cy.goTo('')
     button.clickSignIn()
-    toLogin.login(data.validData.validUser, data.validData.validPass)
-    button.clickLogin()
-    button.clickShowcart()
-    button.clickProceedtoCheckout()
-    cy.ShippingAddress('Home', 'Jl. Merdeka', 'Malang', 'Alaska', '123456', 'Indonesia', '086543456765')
-    
-  })
-
-  it('Proceed Checkout When Click "View and Edit Cart" - Successful', () => {
-    cy.goTo('')
-    button.clickSignIn()
-    toLogin.login(data.validData.validUser, data.validData.validPass)
+    toLogin.login(data.validData.validUser2, data.validData.validPass2)
     button.clickLogin()
     button.clickShowcart()
     button.clickViewAndEditCart()
     button.clickCheckout()
-    
-    
-    
+    button.clickNext()
+    button.clickPlaceOrder()
+    button.clickContinueShopping()
   })
-
   
 })
+
+describe('Verify Magento Checkout Product - Failed', () => {
+  it('Proceed Checkout When No Items In Shopping Cart - Failed', () => {
+    cy.goTo('')
+    button.clickSignIn()
+    toLogin.login(data.validData.validUser2, data.validData.validPass2)
+    button.clickLogin()
+    button.clickShowcart()
+    cy.VerifyNoItemsInCart('.subtitle', 'You have no items in your shopping cart.')
+  })
+})
+
 Cypress.on('uncaught:exception', (err, runnable) => {
   return false
 })
