@@ -3,7 +3,7 @@ import button from '../../../support/pageObject/button-checkout'
 import toLogin from '../../../support/pageObject/toLogin'
 
 describe('Verify Magento Checkout Product - Successful', () => {
-    it('Proceed Checkout When Click Button "Proceed to Checkout" and Use The Shipping Address Provided - Successful', () => {
+    it('Verifiy Checkout All Items With Click Button "Proceed to Checkout" and Use The Shipping Address Provided - Successful', () => {
     cy.goTo('')
     button.clickSignIn()
     toLogin.login(data.validData.validUser2, data.validData.validPass2)
@@ -14,7 +14,7 @@ describe('Verify Magento Checkout Product - Successful', () => {
     button.clickPlaceOrder()
     button.clickContinueShopping()
   })
-  it('Proceed Checkout When Click Button "Proceed to Checkout" and New Shipping Address - Successful', () => {
+  it('Verifiy Checkout All Items With Click Button "Proceed to Checkout" and New Shipping Address - Successful', () => {
     cy.goTo('')
     button.clickSignIn()
     toLogin.login(data.validData.validUser2, data.validData.validPass2)
@@ -24,13 +24,26 @@ describe('Verify Magento Checkout Product - Successful', () => {
     button.clickNewAddress()
     cy.NewShippingAddress('Home', 'Jl. Hts', 'Malang', 'Florida', '135798', 'Indonesia', '085678234567')
   })
-  it.only('Proceed Checkout When Click "View and Edit Cart" - Successful', () => {
+  it('Verify Checkout All Items With Click "View and Edit Cart" - Successful', () => {
     cy.goTo('')
     button.clickSignIn()
     toLogin.login(data.validData.validUser2, data.validData.validPass2)
     button.clickLogin()
     button.clickShowcart()
     button.clickViewAndEditCart()
+    button.clickCheckout()
+    button.clickNext()
+    button.clickPlaceOrder()
+    button.clickContinueShopping()
+  })
+  it.only('Verifiy Checkout Some Items With Click "View and Edit Cart" and "Move to Wishlist"- Successful', () => {
+    cy.goTo('')
+    button.clickSignIn()
+    toLogin.login(data.validData.validUser2, data.validData.validPass2)
+    button.clickLogin()
+    button.clickShowcart()
+    button.clickViewAndEditCart()
+    button.clickMoveToWishlist()
     button.clickCheckout()
     button.clickNext()
     button.clickPlaceOrder()
@@ -47,6 +60,16 @@ describe('Verify Magento Checkout Product - Failed', () => {
     button.clickLogin()
     button.clickShowcart()
     cy.VerifyNoItemsInCart('.subtitle', 'You have no items in your shopping cart.')
+  })
+  it('Verifiy Apply Discount Code - Failed', () => {
+    cy.goTo('')
+    button.clickSignIn()
+    toLogin.login(data.validData.validUser2, data.validData.validPass2)
+    button.clickLogin()
+    button.clickShowcart()
+    button.clickProceedtoCheckout()
+    button.clickNext()
+    cy.ApplyDiscountCode('abcde')
   })
 })
 
