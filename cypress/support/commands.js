@@ -30,6 +30,13 @@ Cypress.Commands.add('NewShippingAddress',(company, street, city, state, zip, co
   cy.get('.modal-footer > .primary').click()
 })
 
+Cypress.Commands.add('ApplyDiscountCode', (code) => {
+  cy.get('#block-discount-heading').click()
+  cy.get('#discount-code').clear().type(code)
+  cy.get('#discount-form > .actions-toolbar > .primary > .action').click()
+  cy.get('.messages > .message > div').should('contain', 'The coupon code')
+})
+
 Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from
     // failing the test
