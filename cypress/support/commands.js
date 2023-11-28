@@ -14,6 +14,27 @@
 Cypress.Commands.add('goTo', (laman) => {
     cy.visit(laman)
 })
+
+Cypress.Commands.add('VerifyNoItemsInCart', (locator, value) => {
+  cy.get(locator).should('contain', value)
+})
+
+Cypress.Commands.add('NewShippingAddress',(company, street, city, state, zip, country, phone) => {
+  cy.get('[name="company"]').type(company)
+  cy.get('[name="street[0]"]').type(street)
+  cy.get('[name="city"]').type(city)
+  cy.get('[name="region_id"]').select(state)
+  cy.get('[name="postcode"]').type(zip)
+  cy.get('[name="country_id"]').select(country)
+  cy.get('[name="telephone"]').type(phone)
+  cy.get('.modal-footer > .primary').click()
+})
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // returning false here prevents Cypress from
+    // failing the test
+    return false
+  })
 //
 //
 // -- This is a child command --
